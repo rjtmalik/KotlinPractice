@@ -1,0 +1,36 @@
+//https://www.techiedelight.com/evaluate-binary-expression-tree/
+
+import java.lang.UnsupportedOperationException
+
+class Node(var Left: Node?, var Right: Node?, var Value: String)
+
+fun main(args: Array<String>) {
+    val n10 = Node(null, null, "10")
+    val n5 = Node(null, null, "5")
+    val minus = Node(n10, n5, "-")
+    val n5B = Node(null, null, "5")
+    val multiply = Node(minus, n5B, "*")
+    val n27 = Node(null, null, "27")
+    val n7 = Node(null, null, "7")
+    val divide = Node(n27, n7, "/")
+    val root = Node(multiply, divide, "+")
+
+    println(sumOfTreeStarting(root))
+}
+
+fun sumOfTreeStarting(root: Node?) : Int{
+    val operators = arrayOf("+", "/", "-", "*")
+    return if (operators.any { x -> x == root!!.Value }) {
+        val leftNum = sumOfTreeStarting(root!!.Left)
+        val rightNum = sumOfTreeStarting(root!!.Right)
+        when(root!!.Value){
+            "+"-> leftNum + rightNum
+            "-"-> leftNum - rightNum
+            "*"-> leftNum * rightNum
+            "/"-> leftNum / rightNum
+            else -> throw UnsupportedOperationException()
+        }
+    }
+    else
+        root!!.Value.toInt()
+}
