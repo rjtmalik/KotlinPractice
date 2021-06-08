@@ -11,7 +11,7 @@ fun main(args: Array<String>) {
         println(result[e])
     }
 }
-//random comment
+//random comment 2
 
 private fun ValidatePhoto(dimensions: String, width: Int): String {
     val splitDim = dimensions.split(" ")
